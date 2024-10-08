@@ -1,0 +1,16 @@
+#!/bin/bash
+
+declare -A config_files=(
+  [home]="/home/$USER/.bashrc-home"
+  [work]="/home/$USER/.bashrc-work"
+)
+
+read -p "Введите имя конфигурации (home или work): " config_name
+
+if [[ ${config_files[$config_name]} ]]; then
+  # Создание символьной ссылки
+  ln -sf "${config_files[$config_name]}" "$HOME/.bashrc"
+  echo "Переключено на конфигурацию: $config_name"
+else
+  echo "Неверная конфигурация!"
+fi
